@@ -1,0 +1,28 @@
+spring:
+  profiles: development
+  cloud:
+    config:
+      name: product-catalog
+      uri: http://localhost:8888
+      failFast: false
+---
+spring:
+  profiles: ci,e2e,fusion,performance
+  cloud:
+    config:
+      name: dpo-integration-service,mosaic-production-auth #,common  #property file starts with mosaic like dpo-integration-service-[ci|e2e|production] and common-[ci|e2e|production]
+      uri: http://mosaic-config-server-preprod.apps.cfdev.phx.gaptech.com
+      failFast: true
+---
+spring:
+  profiles: production
+  cloud:
+    config:
+      name: dpo-integration-service,mosaic-production-auth #,common  #property file starts with mosaic like dpo-integration-service-[ci|e2e|production] and common-[ci|e2e|production]
+      uri: http://mosaic-config-server.apps.cfprod.phx.gaptech.com
+      failFast: true	  
+#spring.cloud.config.uri is optional, if the uri is same by default
+#For further details, pls check @  https://github.com/spring-cloud/spring-cloud-config
+#This is the default behaviour for any application which has the Spring Cloud Config Client on the classpath. 
+#When a config client starts up it binds to the Config Server (via the bootstrap configuration property spring.cloud.config.uri) and initializes Spring Environment with remote property sources.
+#The net result of this is that all client apps that want to consume the Config Server need a bootstrap.yml (or an environment variable) with the server address in spring.cloud.config.uri (defaults to "http://localhost:8888").
