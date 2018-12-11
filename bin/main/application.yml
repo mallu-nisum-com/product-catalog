@@ -9,3 +9,4 @@ spring:
     url: jdbc:mariadb://localhost:3306/catalogdb
     driverClassName: org.mariadb.jdbc.Driver
     username: root
+spring.main.allow-bean-definition-overriding: true
